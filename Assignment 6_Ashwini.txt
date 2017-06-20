@@ -1,0 +1,410 @@
+1. Write a R program using control operators to test whether following values are prime numbers or not by providing a PRIME or NOT PRIME message as output : 
+A. 103 B. 82 C. 179
+
+vec<-A or B or C
+vec
+vec1<-seq(2,vec-1)
+vec1
+rem<-0
+rem
+for(i in vec1)
+{
+  if(vec==2)
+    {rem<-1
+   break}
+  if(vec%%i==0)
+  {rem<-0
+  break}
+  else
+    {rem<-vec%%i}
+}
+ifelse(rem==0,"NOT PRIME","PRIME")
+A.PRIME
+B.NOT PRIME
+C.PRIME
+
+2. Write a R program using control operators to identify letter u and a both occur in the following words: 1. above 2. unit 3. Under
+
+x<-c("above","unit","under","log")
+library(stringr)
+str_detect(x, "a|u")
+
+str_detect(x, "a|u")
+[1]  TRUE  TRUE  TRUE FALSE
+
+str_extract_all(x, "[a|u][a-z]+")
+[[1]]
+[1] "above"
+
+[[2]]
+[1] "unit"
+
+[[3]]
+[1] "under"
+
+[[4]]
+character(0)
+
+
+3. Write a function that to calculate BMI (Body Mass Index):
+
+for sqr_x(h) i created a function,
+
+sqr_x<-function(x)
+{
+  val<-x*x
+}sqr_x<-function(x)
+{
+  val<-x*x
+}
+
+BMI_calculator<-function(w,h)   
+{
+  bmi=w*10000/sqr_x(h)
+  if(bmi<15)
+    print("Very severely underweight")
+  if(bmi>15 & bmi<16)
+    print("Severely underweight")
+  if(bmi>16 & bmi <18.5)
+    print("underweight")
+  if(bmi >18.5 &  bmi<25)
+    print("Normal (healthy weight)")
+  if(bmi>25 & bmi<30)
+    print("Overweight")
+  if(bmi>30 & bmi<35)
+    print("Obese Class I (Moderately obese)")
+  if(bmi>35 & bmi<40)
+    print("Obese Class II (Severely obese)")
+  if(bmi>40)
+    print("Obese Class III (Very Severely obese))")
+  return(bmi)
+}
+
+BMI_calculator(90,173)
+[1] "Obese Class I (Moderately obese)"
+[1] 30.07117
+
+4.Write a function called sum_of_cubes, that calculates the sum of cubes of the first n natural numbers :
+
+sum_of_cubes<- function(x)
+{
+ (x*(x+1)/2)^2
+}
+val<-sum_of_cubes(10)
+val
+[1] 3025
+
+5. Write a function to calculate the mode (highest frequency) of the following vector:
+
+x = c(2,3,3,4,4,5,6,7,9,10)
+x
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+Mode(x)
+
+6. Write a function to calculate the no. of prime numbers of the following vector :
+x = c(2,2,3,3,4,5,7,11,15,19,24,29)
+
+count <- 0
+calculate_no_of_primes <- function(x)
+    {
+  for( i in x)
+      {
+    if(isPrime(i))
+      {count<- count+1
+    cat(i, ": Prime \n")}
+    else{cat(i, ": NOT PRIME \n")}
+  }
+  return(count)
+}
+
+xvar<-calculate_no_of_primes(x)
+xvar
+
+8.Perform below operations using Data.frame and Data.table
+
+a. Load 2 files (.csv) and show it on screen ( F1 – empno, deptid,mgr_id , F2 – empno, sal, DOJ)
+
+setwd()
+mydata2=read.csv("C:/Anu/R/ACAD/F2.csv")
+mydata2
+mydata1=read.csv("C:/Anu/R/ACAD/F1.csv")
+mydata1
+
+b. Perform equi join
+
+sqldf ('select deptid,mydata1.empno,mgr_id from mydata1
++        inner join mydata2 on mydata2.empno=mydata1.empno')
+           deptid empno mgr_id
+1         finance     1     10
+2        facility     2     11
+3  Administration     3     12
+4         IT Desk     4     10
+5  Administration     5     13
+6        facility     6     11
+7         IT Desk     7     12
+8  Administration     8     10
+9        facility     9     12
+10        IT Desk    10     11
+11           <NA>    11     10
+12       facility    12     13
+13 Administration    13     11
+14        IT Desk    14     10
+15       facility    15     12
+16 Administration    16     10
+17        IT Desk    17     12
+
+c. Perform left outer join
+
+merge(mydata2, mydata1, by = "empno", all.x = TRUE)
+ empno    sal        DOJ         deptid mgr_id
+1      1  50000  10/3/2014        finance     10
+2      2  18000  18/6/2016       facility     11
+3      3  75000  12/9/2013 Administration     12
+4      4  60000   3/3/2011        IT Desk     10
+5      5  90000   3/3/2010 Administration     13
+6      6  25000  10/4/2015       facility     11
+7      7  40000   4/8/2012        IT Desk     12
+8      8  34000 30/12/2015 Administration     10
+9      9  28500  13/5/2015       facility     12
+10    10  37500 28/11/2013        IT Desk     11
+11    11  88440  16/7/2014           <NA>     10
+12    12  26750  19/6/2015       facility     13
+13    13 115000 12/12/2010 Administration     11
+14    14  88000   9/8/2010        IT Desk     10
+15    15  15000  13/7/2017       facility     12
+16    16  26540 29/09/2015 Administration     10
+17    17  98000  24/2/2010        IT Desk     12
+
+d. Perform right outer join
+
+merge(mydata1, mydata2, by = "empno", all.x = TRUE)
+
+   empno         deptid mgr_id    sal        DOJ
+1      1        finance     10  50000  10/3/2014
+2      2       facility     11  18000  18/6/2016
+3      3 Administration     12  75000  12/9/2013
+4      4        IT Desk     10  60000   3/3/2011
+5      5 Administration     13  90000   3/3/2010
+6      6       facility     11  25000  10/4/2015
+7      7        IT Desk     12  40000   4/8/2012
+8      8 Administration     10  34000 30/12/2015
+9      9       facility     12  28500  13/5/2015
+10    10        IT Desk     11  37500 28/11/2013
+11    11           <NA>     10  88440  16/7/2014
+12    12       facility     13  26750  19/6/2015
+13    13 Administration     11 115000 12/12/2010
+14    14        IT Desk     10  88000   9/8/2010
+15    15       facility     12  15000  13/7/2017
+16    16 Administration     10  26540 29/09/2015
+17    17        IT Desk     12  98000  24/2/2010
+
+e. Perform full outer join
+
+merge(mydata2, mydata1, by = "empno", all = TRUE)
+   empno    sal        DOJ         deptid mgr_id
+1      1  50000  10/3/2014        finance     10
+2      2  18000  18/6/2016       facility     11
+3      3  75000  12/9/2013 Administration     12
+4      4  60000   3/3/2011        IT Desk     10
+5      5  90000   3/3/2010 Administration     13
+6      6  25000  10/4/2015       facility     11
+7      7  40000   4/8/2012        IT Desk     12
+8      8  34000 30/12/2015 Administration     10
+9      9  28500  13/5/2015       facility     12
+10    10  37500 28/11/2013        IT Desk     11
+11    11  88440  16/7/2014           <NA>     10
+12    12  26750  19/6/2015       facility     13
+13    13 115000 12/12/2010 Administration     11
+14    14  88000   9/8/2010        IT Desk     10
+15    15  15000  13/7/2017       facility     12
+16    16  26540 29/09/2015 Administration     10
+17    17  98000  24/2/2010        IT Desk     12
+
+f. Perform filter operation –Eg find all the rows for which col1 is null
+   empno         deptid mgr_id
+13    NA Administration     11
+
+g. Perform group by , sum, average operation
+
+mydata2%>%select(empno,DOJ,sal)%>%
+   group_by(empno,sal)%>% mutate(s_sal=sum(mydata2$sal),avg_sal=mean(mydata2$sal))
+
+empno        DOJ    sal  s_sal  avg_sal
+   <int>     <fctr>  <int>  <int>    <dbl>
+ 1     1  10/3/2014  50000 915730 53866.47
+ 2     2  18/6/2016  18000 915730 53866.47
+ 3     3  12/9/2013  75000 915730 53866.47
+ 4     4   3/3/2011  60000 915730 53866.47
+ 5     5   3/3/2010  90000 915730 53866.47
+ 6     6  10/4/2015  25000 915730 53866.47
+ 7     7   4/8/2012  40000 915730 53866.47
+ 8     8 30/12/2015  34000 915730 53866.47
+ 9     9  13/5/2015  28500 915730 53866.47
+10    10 28/11/2013  37500 915730 53866.47
+11    11  16/7/2014  88440 915730 53866.47
+12    12  19/6/2015  26750 915730 53866.47
+13    13 12/12/2010 115000 915730 53866.47
+14    14   9/8/2010  88000 915730 53866.47
+15    15  13/7/2017  15000 915730 53866.47
+16    16 29/09/2015  26540 915730 53866.47
+17    17  24/2/2010  98000 915730 53866.47
+>
+
+h. Perform (A “-“ B) operation
+
+didnt understand the question??where is A and B??
+
+i. Create a derived column  – do some data transformation on that
+library(lubridate)
+> DOJinmonths<-month(mydata2$DOJ)
+> cbind(mydata2,DOJinmonths)
+   empno    sal        DOJ DOJinmonths
+1      1  50000  10/3/2014           3
+2      2  18000  18/6/2016           6
+3      3  75000  12/9/2013           9
+4      4  60000   3/3/2011           3
+5      5  90000   3/3/2010           3
+6      6  25000  10/4/2015           4
+7      7  40000   4/8/2012           8
+8      8  34000 30/12/2015          12
+9      9  28500  13/5/2015           5
+10    10  37500 28/11/2013          11
+11    11  88440  16/7/2014           7
+12    12  26750  19/6/2015           6
+13    13 115000 12/12/2010          12
+14    14  88000   9/8/2010           8
+15    15  15000  13/7/2017           7
+16    16  26540 29/09/2015           9
+17    17  98000  24/2/2010           2
+
+j. Create a “working” test that example
+
+
+	
+9. Create R functions for the following operations
+• Write a function to find out duplicate entries based on a key or group of keys
+
+v1<-c(1,58,3,4,58)
+n=length(v1)
+n
+
+for(i in n) 
+{
+  for(j in i)
+  {
+    if(v1[i] == v1[j])
+      break
+  }
+  if(i==j)
+  {
+    print(v1[i])
+    }
+  } 
+sprintf("%d is duplicate entry",v1[i])
+sprintf("%d is position of the duplicate entry",i)
+
+
+[1] 58
+
+[1] "58 is duplicate entry"
+
+[1] "5 is position of the duplicate entry"
+
+
+10. Create R functions for the following operations
+
+a. Find out if there are any nulls in a dataset or in some specific number of columns
+
+mean operator in a dataset would return NA and implies NA is present.
+
+NulldataId<-function(x)
+            {if(mean(x=0))
+  {print("Empty values pesent")}
+}
+
+
+11. Create R functions for the following operations
+
+a. Remove duplicates from a given vector and return it back.
+
+RMandRET<-function(y)
+{
+dpentry<-duplicated(y)
+positiond<-which(duplicated(y)=="TRUE")
+newentry<-subset(y,duplicated(y)=="FALSE")
+newy<-c(newentry,y[positiond])
+return(newy)
+}
+y<-c(100,20,30,40,50,100)
+RMandRET(y)
+[1] 100  20  30  40  50 100
+
+b. Compute count of distinct
+
+countofdistinct<-function(v1)
+{
+  duplicated(v1)
+  newentry<-subset(v1,duplicated(v1)=="FALSE")
+  Distinctcount<-length(newentry)
+  return(Distinctcount)
+}
+countofdistinct(v1)
+v1
+[1]  1 58  3  4 58
+
+countofdistinct(v1)
+[1] 4
+
+c. Concatenate two strings.
+
+Concat2strings<- function(first_str,last_str)
+{
+  paste(first_str,last_str)
+}
+
+Concat2strings("LION","THE KING") 
+
+> Concat2strings("LION","THE KING")
+[1] "LION THE KING"
+
+d. Perform Column-wise/Row-wise sum using apply function.
+
+sumusingapply<-function(x)
+{
+ apply(x, 2, mean, trim = .2)
+ col.sums <- apply(x, 2, sum)
+ row.sums <- apply(x, 1, sum)
+ return(col.sums)
+}
+x <- cbind(x1 = 3, x2 = c(4:1, 2:5))
+sumusingapply(x)
+
+> sumusingapply(x)
+x1 x2 
+24 24 
+
+
+12. Create R functions for the following operations
+		
+d. Drop given column from a data frame
+
+dropfn<-function(df,columnnumber)
+{
+df[-columnnumber]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
